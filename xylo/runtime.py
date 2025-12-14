@@ -10,21 +10,31 @@ global_vars = {}
 def eval_value(value, global_vars, local_vars):
     """Resolve a value: variable, number, or string literal"""
     value = value.strip()
+
+    # Check local variable
     if value in local_vars:
         return local_vars[value]
+
+    # Check global variable
     elif value in global_vars:
         return global_vars[value]
-    else:
-        try:
+
+    # Number literals
+    try:
+        if "." in value:
+            return float(value)
+        else:
             return int(value)
-        except:
-            try:
-                return float(value)
-            except:
-                if value.startswith('"') and value.endswith('"'):
-                    return value[1:-1]
-                else:
-                    return value  # fallback as string
+    except:
+        pass
+
+    # String literals (must be quoted)
+    if value.startswith('"') and value.endswith('"'):
+        return value[1:-1]
+
+    # Otherwise, invalid
+    error(f"Invalid value or undeclared variable '{value}'")
+
 
 def parse_terminal_write(cmd, global_vars, local_vars):
     """Parse terminal.write and handle concatenation"""
