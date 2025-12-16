@@ -1,25 +1,15 @@
-asset.import("hero", "/img.png") : sprite
-
-var x = 100
-var y = 200
-var my_variable = "hello!"
-
-
-terminal.write("Hello World!")
-terminal.write(my_variable)
-terminal.write("We love xylo!")
+asset.import("hero", "img.png") : sprite
 
 function init() {
-    var score = 0
-    score += 1
-    terminal.write("Local score is: " + score)
+    var y = 200
+    var x = 100
 }
 
+
 function update() {
-    local var temp = 5
-    terminal.write("Local temp is: " + temp)
+
 }
 
 function draw() {
-    drawImage(hero, x, y, 100, 100, 0)
+    shape.circle(blue, red, 50, 100, 100, 150)
 }
